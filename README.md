@@ -18,9 +18,7 @@ Three commands were used:
 2. ./flow.tcl -interactive
 3. package require openlane 0.9
 
-   ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/README.md)
-   
-
+   ![Like below!](open lane success.png)
 
 ### The first task was to calculate the flip-flop ratio which is defined as:
 
