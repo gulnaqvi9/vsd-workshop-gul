@@ -127,7 +127,7 @@ After zooming in!
 13. Modified the config.tcl file
     - Added lib file using LIB_SYNTH command (lib file for abc mapping)
     - add the below line to point to the LEF location which is required during spice extraction.
-    - set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/src/*.lef
+    - set ::env(EXTRA_LEFS) [glob $::env(OPENLANE\_ROOT)/designs/$::env(DESIGN_NAME)/src/\*.lef
 
 15. Run OpenLane and run the following commands:
     - docker
