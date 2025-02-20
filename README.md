@@ -17,6 +17,7 @@ Three commands were used:
 1. docker
 2. ./flow.tcl -interactive
 3. package require openlane 0.9
+   
 ![Like below](open lane success.png)
 
 ### The first task was to calculate the flip-flop ratio which is defined as:
