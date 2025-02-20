@@ -12,7 +12,13 @@ The workshop started with an introduction to Openlane
 3. To be able to apply the concepts of physical design in practice.
 4. And last but not least to git clone a custom cell and plug it into the openlane flow and obtain the GDS II flow.
 
-Openlane is a flow that automates the entire process from RTL to GDS.
+### To start openlane:
+Three commands were used:
+1. docker
+2. ./flow.tcl -interactive
+3. package require openlane 0.9
+   
+
 
 ### The first task was to calculate the flip-flop ratio which is defined as:
 
