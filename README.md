@@ -39,7 +39,7 @@ run_synthesis
 # Then floorplan was done using the command:
 run_floorplan
 
-![] (https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/floorplan%20successful.png)
+![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/floorplan%20successful.png)
 
 
 # Layout post floorplan was viewed in Magic using the following command:
@@ -66,5 +66,59 @@ command used: run_placement
 
 After zooming in!
 ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/layout%20post%20placement%20zoomin.png)
+
+
+# Cloning and plugging the custom cell in the OpenLane flow
+1. vsdstdcelldesign folder was git cloned
+   1. This contains CMOS inverter 
+2. Layout was viewed in magic using the following command
+   - magic -T/<path to sky130A.tech file> <path to mag.file>
+   - magic -T sky130A.tech sky130_inv.mag &
+     ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/inverter%20from%20spice.png)
+3. Then the SPICE file was extracted using the following commands in Magic
+   - extract all
+   - ext2spice cthresh 0 rthresh 0
+   - ext2spice
+   - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/commands%20for%20extracting%20spice%20file.png)
+4. SPICE file was created
+   ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/spice%20file%20created.png)
+5. Then the Inverter was characterised (in NGSPICE):
+   - By applying a pulse input (0 to 2.5V)
+   - Below are the input and output waveforms
+   - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/inverter%20ngspice%20simulation%20results.png)
+   - Rise Transition Delay: time taken by output to go from 20% to 80% of maximum value -> 44.13ps
+   - Fall Transition Delay: time taken by output to go from 80% to 20% of maximum value -> 26.3ps
+   - Cell Rise Delay: time taken by output to rise from 0 to 1 after the input switches
+        - time output signal reaches 50% of its max value - time when the input signal reaches 50% of its max value
+        - ->27.87ps
+   - Cell Fall Delay: time taken by output to fall from 1 to 0 after the input switches
+        - Time when the output signal reaches 50% of Vdd while transitioning from high (1) to low (0) - time when              the input signal reaches 50% of Vdd while transitioning from high (1) to low (0).
+        - ->2.93ps
+     ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/inverter%20characterization.png)
+ 6. Then a file (drc_tests.tgz) was downloaded using the below command:
+    - wget HTTP://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+    - tar  xfz drc_tests.tgz -> command was used to extract, decompress and unpack the contents of file.
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/tar%20file.png)
+
+ 7. File (met3.mag) was opened in magic
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/met3.mag%20file%20in%20magic%20.png)
+    - To check the drc rule violation, command -> drc why
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/drc%20rule%20violation%20in%20metal3.png)
+      
+ 8. Exercise: To load file (poly.mag) and run drc check
+    - poly.mag file
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/poly.mag.png)
+    - Different layers
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/poly.mag%20different%20layers.png)
+    - DRC Rule Violation: minimum spacing between poly layer and poly resistor layer
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/rule%20violation%20minimum%20spacing%20between%20poly%20resistor%20to%20poly.png)
+    - DRC Rule violation: when n-well is untapped
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/drc%20rule%20violation%20when%20nwell%20is%20untapped.png)
+
+9. Extracted LEF file from .mag file
+
+10. Synthesis step preformed for the custom cell: Inverter
+    - ![]()
+     
 
 
