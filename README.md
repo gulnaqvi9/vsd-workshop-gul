@@ -19,6 +19,7 @@ Three commands were used:
 3. package require openlane 0.9
    
 ![Like below](open lane success.png)
+![Like below!](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/8e58efdf68d27227e8c5d1ad74f3b970216bd96f/open%20lane%20success.png)
 
 ### The first task was to calculate the flip-flop ratio which is defined as:
 
