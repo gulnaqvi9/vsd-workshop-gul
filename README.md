@@ -54,7 +54,7 @@ In the below image, the selected pin: __mem_addr[30]__ (horizontal pin) is place
 ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/horizontal%20io%20pin%20layer%20post%20floorplan.png)
 
 In the below image, the selected pin: __mem_addr[24]__ (vertical pin) is placed on metal layer 
-![] (https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/vertical%20io%20pin%20layer%20post%20floorplan.png)
+![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/vertical%20io%20pin%20layer%20post%20floorplan.png)
 
 # Following this came, Placement
 command used: run_placement
@@ -92,7 +92,7 @@ After zooming in!
         - time output signal reaches 50% of its max value - time when the input signal reaches 50% of its max value
         - ->27.87ps
    - Cell Fall Delay: time taken by output to fall from 1 to 0 after the input switches
-        - Time when the output signal reaches 50% of Vdd while transitioning from high (1) to low (0) - time when              the input signal reaches 50% of Vdd while transitioning from high (1) to low (0).
+        - Time when the output signal reaches 50% of Vdd while transitioning from high (1) to low (0) - time when the input signal reaches 50% of Vdd while transitioning from high (1) to low (0).
         - ->2.93ps
      ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/inverter%20characterization.png)
  6. Then a file (drc_tests.tgz) was downloaded using the below command:
