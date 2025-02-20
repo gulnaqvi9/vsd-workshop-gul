@@ -116,9 +116,101 @@ After zooming in!
     - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/drc%20rule%20violation%20when%20nwell%20is%20untapped.png)
 
 9. Extracted LEF file from .mag file
+    -![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/extracted%20lef%20file%20from%20.mag%20file.png)
+   
+11. Copied LEF file to picorv32a/src
+12. Copied following timing files to picorv32a/src
+    - sky130_fd_sc_hd_typical.lib
+    - sky130_fd_sc_hd_fast.lib
+    - sky130_fd_sc_hd_slow.lib
 
-10. Synthesis step preformed for the custom cell: Inverter
-    - ![]()
+13. Modified the config.tcl file
+    - Added lib file using LIB_SYNTH command (lib file for abc mapping)
+    - add the below line to point to the LEF location which is required during spice extraction.
+    - set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/src/*.lef
+
+15. Run OpenLane and run the following commands:
+    - docker
+    - /.flow.tcl -interactive
+    - package require openlane 0.9
+    - prep -design picorv32a -tag 12-02_14-32 -overwrite
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/synthesis%20of%20custom%20inv%20success.png)
+
+
+
+16. Synthesis step preformed for the custom cell: Inverter
+    - Include the below command to include the additional lef into the flow
+    - set lefs [glob $::env(DESIGN_DIR)/src*.lef] 
+    -  add_lefs -src $lefs
+    -  run_synthesis
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/custom%20cell%20slac%20violation%20at%20synthesis.png)
+   
+
+17. Floorplan step
+    - run the following commands:
+    - init_floorplan
+    - place_io
+    - tap_decap_or
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/flooorplan%20success.png)
+   
+18. Placement step
+    - use the following command
+    - run_command: run_placement
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/placement%20done.png)
+   
+19. To reduce slack post placement
+    - Max fanout was reduced to 4 from 6 using: set ::env(SYNTH_MAX_FANOUT)
+    - Negative slack was made zero and synthesis was implemented again
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/changed%20%20fanout%20to%204%20from%206%20and%20running%20synthesis%20again%20post%20placement.png)
+
+20. Layout of a custom cell included in the picorv32a design post placement
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/custom%20cell%20layout%20post%20placement.png)
+
+21. Clock Tree Synthesis
+    - command: run_cts
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/cts%20success%20.png)
+
+22. Generating the power distribution network
+    - command: run_pdn
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/pdn%20success%20post%20cts.png)
+      
+22. Then open OpenRoad, use the following commands
+    1. For the post CTS STA 
+       - open openroad
+       - read_def /<path_to_cts.def>
+       - read_lef /<path_to_merged.lef>
+       - write_db <filename.db> 
+       - read_db <filename.db>
+       - read_verilog <path_to_verilog_file_created_post_cts> 
+       - read _librerty <path_to_typical_timing_library>
+       - read_sdc <path_to_my_base.sdc>
+       - link_design picorv32a
+       - set_propagated_clock [all_clocks]
+       - report_checks -path_delay min_max -fields{slew trans net cap input pin} -format full_clock_expanded -digits 4
+       - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/post%20cts%20slack%20met.png)
+       - exit openroad
+
+23. Routing
+    - use the command: run_routing
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/routing%20completed.png)
+    - Post routing layout
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/post%20route%20layout.png)
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/post%20route%20layout%20zoom.png)
+
+24. Post Routing STA
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/post%20rout_sta.png)
+    - STA for Setup (min path)
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/post%20rout_stasetup.png)
+    - STA for Hold (max path)
+    - ![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/post%20rout_sta%20hold.png)
+
+
+
+
+
+
+
+      
      
 
 
