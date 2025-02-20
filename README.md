@@ -33,7 +33,7 @@ run_synthesis
 ![Equation](https://quicklatex.com/cache3/72/ql_94e6e412e796a525cf1f9240fe2da472_l3.png)
 ![Equation](https://quicklatex.com/cache3/f3/ql_b772c4a73aac73eebaab208bc248abf3_l3.png)
 
-![] (https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/flip%20flop%20post%20synthesis.png)
+![](https://github.com/gulnaqvi9/vsd-workshop-gul/blob/main/flip%20flop%20post%20synthesis.png)
 
 
 # Then floorplan was done using the command:
